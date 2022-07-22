@@ -1,5 +1,6 @@
 package com.tosan.electrical_vehicle_charging_management.web;
 
+import com.tosan.electrical_vehicle_charging_management.data.entity.ParentCompany;
 import com.tosan.electrical_vehicle_charging_management.dto.ParentCompanyDto;
 import com.tosan.electrical_vehicle_charging_management.service.CompanyService;
 import io.swagger.annotations.Api;
@@ -44,6 +45,18 @@ public class CompanyRestController {
             @ApiResponse(code = 401, message = "not authorized!"),
             @ApiResponse(code = 403, message = "forbidden!!!"),
             @ApiResponse(code = 404, message = "not found!!!")})
+    @PutMapping(value = "/SingleCompanyInfo", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ParentCompany> getSingleCompanyInfo(@RequestBody ParentCompanyDto parentCompanyDto) {
+        ParentCompany dto = companyService.findSingleCompanyByName(parentCompanyDto.getName());
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 400, message = "validation error!"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "not found!!!")})
     @PostMapping(value = "/addCompany", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void saveNewCompany(@RequestBody ParentCompanyDto parentCompanyDto) {
         companyService.save(parentCompanyDto);
@@ -69,16 +82,5 @@ public class CompanyRestController {
     @PutMapping(value = "/updateCompany", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateCompany(@RequestBody ParentCompanyDto parentCompanyDto) {
         companyService.update(parentCompanyDto);
-    }
-
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success|OK"),
-            @ApiResponse(code = 400, message = "validation error!"),
-            @ApiResponse(code = 401, message = "not authorized!"),
-            @ApiResponse(code = 403, message = "forbidden!!!"),
-            @ApiResponse(code = 404, message = "not found!!!")})
-    @PutMapping(value = "/SingleCompanyInfo", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void getSingleCompanyInfo(@RequestBody ParentCompanyDto parentCompanyDto) {
-        companyService.findSingleCompanyByName(parentCompanyDto.getName());
     }
 }
