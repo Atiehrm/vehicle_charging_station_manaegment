@@ -61,4 +61,16 @@ public class StationRestController {
     public void saveNewStation(@RequestBody StationDto dto) {
         stationService.save(dto);
     }
+
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 400, message = "validation error!"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "not found!!!")})
+    @PostMapping(value = "/deleteStation", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteStation(@RequestBody StationDto dto) {
+        stationService.delete(dto);
+    }
+
 }
