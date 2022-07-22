@@ -1,6 +1,7 @@
 package com.tosan.electrical_vehicle_charging_management.web;
 
 import com.tosan.electrical_vehicle_charging_management.data.entity.Station;
+import com.tosan.electrical_vehicle_charging_management.dto.CustomerDto;
 import com.tosan.electrical_vehicle_charging_management.dto.StationDto;
 import com.tosan.electrical_vehicle_charging_management.service.StationService;
 import io.swagger.annotations.ApiOperation;
@@ -89,7 +90,7 @@ public class StationRestController {
             @ApiResponse(code = 403, message = "forbidden!!!"),
             @ApiResponse(code = 404, message = "not found!!!")})
     @PutMapping(value = "/getAroundstation", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Set<Station> getAroundStations(@RequestBody StationDto dto) {
-        return stationService.getAroundStations(dto.getLatitude(), dto.getLongitude(), 23);
+    public Set<Station> getAroundStations(@RequestBody CustomerDto dto) {
+        return stationService.getAroundStations(dto.getLatitude(), dto.getLongitude());
     }
 }

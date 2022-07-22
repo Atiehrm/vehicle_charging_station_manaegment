@@ -9,8 +9,8 @@ import com.tosan.electrical_vehicle_charging_management.service.exception.Entity
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author arm
@@ -67,7 +67,40 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
-    public Set<Station> getAroundStations(double latitue, double longitude, double distance) {
-        return null;
+    public Set<Station> getAroundStations(double latitude, double longitude) {
+        Map<Station, Double> stationDistances = new HashMap<>();
+        Set<Station> stationSet = stationRepository.findAll();
+        for (Station s : stationSet) {
+            double distance = calculateDistance(s, latitude, longitude);
+            stationDistances.put(s, distance);
+        }
+
+        Set<Station> topFiveStations =
+                stationDistances.entrySet().stream()
+                        .sorted(Map.Entry.comparingByValue(Comparator.naturalOrder()))
+                        .limit(5)
+                        .map(Map.Entry::getKey)
+                        .collect(Collectors.toSet());
+        return topFiveStations;
+    }
+
+    public double calculateDistance(Station station, double latitude, double longitude) {
+        double theta = station.getLongitude() - longitude;
+        double dist = Math.sin(deg2rad(station.getLatitude())) * Math.sin(deg2rad(latitude))
+                + Math.cos(deg2rad(station.getLatitude())) * Math.cos(deg2rad(latitude))
+                * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+        dist = dist * 1.609344;
+        return dist;
+    }
+
+    double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+    double rad2deg(double rad) {
+        return (rad * 180.0 / Math.PI);
     }
 }

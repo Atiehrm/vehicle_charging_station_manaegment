@@ -19,5 +19,5 @@ public interface StationService {
 
     Station singleStationInformation(String name);
 
-    Set<Station> getAroundStations(double latitue, double longitude, double distance);
+    Set<Station> getAroundStations(double latitude, double longitude);
 }

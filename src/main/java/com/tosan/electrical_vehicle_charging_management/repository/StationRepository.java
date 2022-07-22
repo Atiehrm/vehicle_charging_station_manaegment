@@ -26,5 +26,4 @@ public interface StationRepository extends CrudRepository<Station, Long> {
     @Query(value = "update Station s set s.name=:name where s.id =:id")
     boolean update(@Param("id") long id, @Param("name") String name);
 
-    Station findStationsByLatitudeAndLongitude(double latitude, double longitude);
 }
