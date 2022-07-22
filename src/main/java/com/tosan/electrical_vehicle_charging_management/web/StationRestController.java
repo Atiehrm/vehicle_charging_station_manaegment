@@ -1,5 +1,6 @@
 package com.tosan.electrical_vehicle_charging_management.web;
 
+import com.tosan.electrical_vehicle_charging_management.data.entity.Station;
 import com.tosan.electrical_vehicle_charging_management.dto.StationDto;
 import com.tosan.electrical_vehicle_charging_management.service.StationService;
 import io.swagger.annotations.ApiOperation;
@@ -81,4 +82,14 @@ public class StationRestController {
         stationService.update(dto);
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 400, message = "validation error!"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "not found!!!")})
+    @PutMapping(value = "/getAroundstation", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Set<Station> getAroundStations(@RequestBody StationDto dto) {
+        return stationService.getAroundStations(dto.getLatitude(), dto.getLongitude(), 23);
+    }
 }
