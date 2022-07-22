@@ -16,6 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ParentCompanyDto {
+    private Long id;
     private String name;
     private Set<ParentCompanyDto> branches = new HashSet<>();
     private Set<StationDto> stationSet = new HashSet<>();

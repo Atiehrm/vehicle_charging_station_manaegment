@@ -21,8 +21,8 @@ public class AddStationTest {
 
     @BeforeEach
     public void init() {
-        station = StationDto.builder().build();
-        station1 = StationDto.builder().build();
+        station = StationDto.builder().name("E").latitude(245533).longitude(6757777).build();
+        station1 = StationDto.builder().name("C").latitude(246663).longitude(67122333).build();
 
     }
 

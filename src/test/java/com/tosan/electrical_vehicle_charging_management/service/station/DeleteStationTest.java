@@ -21,19 +21,19 @@ public class DeleteStationTest {
 
     @BeforeEach
     public void init() {
-        station = StationDto.builder().build();
-        station1 = StationDto.builder().build();
+        station = StationDto.builder().name("E").latitude(245533).longitude(6757777).build();
+        station1 = StationDto.builder().name("C").latitude(246663).longitude(67122333).build();
     }
 
     @Test
     void givenExistStation_WhenDeleteStationCalls_ThenReturnTrueResponse() {
-        boolean result = stationService.delete(station);
+        boolean result = stationService.delete(station1);
         Assertions.assertTrue(result);
     }
 
     @Test
     void givenNotExistStation_WhenDeleteStationCalls_ThenReturnFalseResponse() {
-        boolean result = stationService.delete(station1);
+        boolean result = stationService.delete(station);
         Assertions.assertFalse(result);
     }
 }

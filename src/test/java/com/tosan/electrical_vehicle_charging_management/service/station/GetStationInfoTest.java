@@ -23,13 +23,14 @@ public class GetStationInfoTest {
 
     @BeforeEach
     public void init() {
-        station = StationDto.builder().build();
-        station1 = StationDto.builder().build();
+        station = StationDto.builder().name("E").latitude(245533).longitude(6757777).build();
+        station1 = StationDto.builder().name("C").latitude(246663).longitude(67122333).build();
     }
 
     @Test
     void givenNotExistStation_WhenGetSingleStationInfoCalls_ThenReturnFalseResponse() {
-        Optional<Station> result = Optional.ofNullable(stationService.singleStationInformation(station.getName()));
+        Optional<Station> result = Optional.ofNullable(stationService
+                .singleStationInformation(station.getName()));
         if (result.isEmpty())
             Assertions.fail();
     }
