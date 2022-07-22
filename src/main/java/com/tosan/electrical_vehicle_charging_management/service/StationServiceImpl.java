@@ -5,6 +5,7 @@ import com.tosan.electrical_vehicle_charging_management.dto.StationDto;
 import com.tosan.electrical_vehicle_charging_management.dto.mapper.StationMapper;
 import com.tosan.electrical_vehicle_charging_management.repository.StationRepository;
 import com.tosan.electrical_vehicle_charging_management.service.exception.EntityIsExistException;
+import com.tosan.electrical_vehicle_charging_management.service.exception.EntityNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +17,10 @@ import java.util.Set;
  */
 @Service
 @AllArgsConstructor
-public class StationServiceImpl implements StationService{
+public class StationServiceImpl implements StationService {
     private StationRepository stationRepository;
     private final StationMapper stationMapper;
+
     @Override
     public boolean save(StationDto stationDto) {
         Station station1 = stationMapper.toStation(stationDto);
@@ -33,7 +35,14 @@ public class StationServiceImpl implements StationService{
 
     @Override
     public boolean delete(StationDto stationDto) {
-        return false;
+        Station station1 = stationMapper.toStation(stationDto);
+        Optional<Station> foundedStation = stationRepository.findByName(station1.getName());
+        if (foundedStation.isEmpty()) {
+            throw new EntityNotExistException("station exist!");
+        } else {
+            stationRepository.delete(station1);
+            return true;
+        }
     }
 
     @Override
