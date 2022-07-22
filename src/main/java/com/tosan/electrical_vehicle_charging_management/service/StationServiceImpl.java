@@ -47,7 +47,12 @@ public class StationServiceImpl implements StationService {
 
     @Override
     public boolean update(StationDto stationDto) {
-        return false;
+        Station station1 = stationMapper.toStation(stationDto);
+        Optional<Station> foundedStation = stationRepository.findByName(station1.getName());
+        if (foundedStation.isPresent()) {
+            stationRepository.update(station1.getId(), station1.getName());
+            return true;
+        } else throw new EntityNotExistException("station not exist");
     }
 
     @Override
