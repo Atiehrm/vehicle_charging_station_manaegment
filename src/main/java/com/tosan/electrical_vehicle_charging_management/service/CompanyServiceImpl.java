@@ -48,7 +48,14 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public boolean update(ParentCompanyDto parentCompanyDto) {
-        return false;
+        ParentCompany parentCompany1 = companyMapper.toParentCompany(parentCompanyDto);
+        Optional<ParentCompany> foundedCompany = companyRepository.findByName(parentCompany1.getName());
+        if (foundedCompany.isEmpty()) {
+            throw new EntityNotExistException("company not exist!");
+        } else {
+            companyRepository.update(parentCompany1.getId(), parentCompany1.getName());
+            return true;
+        }
     }
 
     @Override
