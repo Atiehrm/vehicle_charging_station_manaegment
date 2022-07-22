@@ -65,7 +65,8 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public ParentCompany findSingleCompanyByName(String name) {
-        return null;
+        Optional<ParentCompany> company = companyRepository.findByName(name);
+        return company.orElseThrow(() -> new EntityNotExistException("company name not exist!"));
     }
 
     @Override
