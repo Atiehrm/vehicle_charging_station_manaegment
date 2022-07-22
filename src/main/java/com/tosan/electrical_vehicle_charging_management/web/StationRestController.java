@@ -38,4 +38,15 @@ public class StationRestController {
             (@RequestBody StationDto dto) {
         return new ResponseEntity(stationService.stationsInformation(), HttpStatus.OK);
     }
+
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 400, message = "validation error!"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "not found!!!")})
+    @GetMapping(value = "/singleStationInfo", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<StationDto> getSingleCompanyInfo(@RequestBody StationDto dto) {
+        return new ResponseEntity(stationService.singleStationInformation(dto.getName()), HttpStatus.OK);
+    }
 }
