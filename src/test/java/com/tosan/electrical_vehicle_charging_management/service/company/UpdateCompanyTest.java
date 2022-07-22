@@ -21,20 +21,20 @@ public class UpdateCompanyTest {
 
     @BeforeEach
     public void init() {
-        parentCompany = ParentCompanyDto.builder().build();
-        parentCompany1 = ParentCompanyDto.builder().build();
+        parentCompany = ParentCompanyDto.builder().name("Diamond").build();
+        parentCompany1 = ParentCompanyDto.builder().name("Thomas").build();
 
     }
 
     @Test
     void givenExistCompany_WhenUpdateCompanyCalls_ThenReturnTrueResponse() {
-        boolean result = companyService.update(parentCompany);
+        boolean result = companyService.update(parentCompany1);
         Assertions.assertTrue(result);
     }
 
     @Test
     void givenNotExistCompany_WhenUpdateCompanyCalls_ThenReturnFalseResponse() {
-        boolean result = companyService.update(parentCompany1);
+        boolean result = companyService.update(parentCompany);
         Assertions.assertFalse(result);
     }
 }

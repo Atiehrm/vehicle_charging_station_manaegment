@@ -21,8 +21,8 @@ public class AddCompanyTest {
 
     @BeforeEach
     public void init() {
-        parentCompany = ParentCompanyDto.builder().build();
-        parentCompany1 = ParentCompanyDto.builder().build();
+        parentCompany = ParentCompanyDto.builder().name("Diamond").build();
+        parentCompany1 = ParentCompanyDto.builder().name("Thomas").build();
 
     }
 

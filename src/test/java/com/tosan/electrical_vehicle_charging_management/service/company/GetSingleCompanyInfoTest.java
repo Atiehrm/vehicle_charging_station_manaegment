@@ -23,21 +23,23 @@ public class GetSingleCompanyInfoTest {
 
     @BeforeEach
     public void init() {
-        parentCompany = ParentCompanyDto.builder().build();
-        parentCompany1 = ParentCompanyDto.builder().build();
+        parentCompany = ParentCompanyDto.builder().name("Diamond").build();
+        parentCompany1 = ParentCompanyDto.builder().name("Thomas").build();
 
     }
 
     @Test
     void givenNotExistCompany_WhenGetSingleCompanyInfoCalls_ThenReturnFalseResponse() {
-        Optional<ParentCompany> result = Optional.ofNullable(companyService.findSingleCompanyByName(parentCompany.getName()));
+        Optional<ParentCompany> result = Optional.ofNullable(companyService
+                .findSingleCompanyByName(parentCompany.getName()));
         if (result.isEmpty())
             Assertions.fail();
     }
 
     @Test
     void givenExistCompany_WhenGetSingleCompanyInfoCalls_ThenReturnTrueResponse() {
-        Optional<ParentCompany> result = Optional.ofNullable(companyService.findSingleCompanyByName(parentCompany1.getName()));
+        Optional<ParentCompany> result = Optional.ofNullable(companyService
+                .findSingleCompanyByName(parentCompany1.getName()));
         if (result.isPresent())
             Assertions.assertTrue(true);
     }
