@@ -3,6 +3,7 @@ package com.tosan.electrical_vehicle_charging_management.repository;
 import com.tosan.electrical_vehicle_charging_management.data.entity.Station;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +15,7 @@ import java.util.Set;
  * @author arm
  */
 @Repository
-public interface StationRepository {
+public interface StationRepository extends CrudRepository<Station, Long> {
 
     Optional<Station> findByName(String name);
 
