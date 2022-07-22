@@ -57,7 +57,7 @@ public class StationServiceImpl implements StationService {
 
     @Override
     public Set<Station> stationsInformation() {
-        return null;
+        return stationRepository.findAll();
     }
 
     @Override
