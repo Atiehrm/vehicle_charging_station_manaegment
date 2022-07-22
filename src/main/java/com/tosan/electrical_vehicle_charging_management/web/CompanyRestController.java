@@ -1,6 +1,7 @@
 package com.tosan.electrical_vehicle_charging_management.web;
 
 import com.tosan.electrical_vehicle_charging_management.data.entity.ParentCompany;
+import com.tosan.electrical_vehicle_charging_management.dto.ApiErrorDto;
 import com.tosan.electrical_vehicle_charging_management.dto.ParentCompanyDto;
 import com.tosan.electrical_vehicle_charging_management.service.CompanyService;
 import io.swagger.annotations.Api;
@@ -52,7 +53,7 @@ public class CompanyRestController {
 
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success|OK"),
-            @ApiResponse(code = 400, message = "validation error!",response = ApiResponse.class),
+            @ApiResponse(code = 400, message = "validation error!",response = ApiErrorDto.class),
             @ApiResponse(code = 401, message = "not authorized!"),
             @ApiResponse(code = 403, message = "forbidden!!!"),
             @ApiResponse(code = 404, message = "not found!!!")})

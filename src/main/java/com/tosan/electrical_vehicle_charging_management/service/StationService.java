@@ -15,7 +15,7 @@ public interface StationService {
 
     boolean update(StationDto stationDto);
 
-    Set<Station> stationsInformation();
+    Set<StationDto> stationsInformation();
 
     Station singleStationInformation(String name);
 

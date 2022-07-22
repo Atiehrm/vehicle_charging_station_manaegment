@@ -56,8 +56,14 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
-    public Set<Station> stationsInformation() {
-        return stationRepository.findAll();
+    public Set<StationDto> stationsInformation() {
+        Set<StationDto> stationDtos = new HashSet<>();
+        Set<Station> stations = stationRepository.findAll();
+        for (Station s : stations) {
+            StationDto stationDto = stationMapper.toStationDto(s);
+            stationDtos.add(stationDto);
+        }
+        return stationDtos;
     }
 
     @Override
