@@ -71,4 +71,15 @@ public class CompanyRestController {
     public void updateCompany(@RequestBody ParentCompanyDto parentCompanyDto) {
         companyService.update(parentCompanyDto);
     }
+
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 400, message = "validation error!"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "not found!!!")})
+    @PutMapping(value = "/SingleCompanyInfo", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void getSingleCompanyInfo(@RequestBody ParentCompanyDto parentCompanyDto) {
+        companyService.findSingleCompanyByName(parentCompanyDto.getName());
+    }
 }
