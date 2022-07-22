@@ -49,4 +49,15 @@ public class CompanyRestController {
     public void saveNewCompany(@RequestBody ParentCompanyDto parentCompanyDto) {
         companyService.save(parentCompanyDto);
     }
+
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 400, message = "validation error!"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "not found!!!")})
+    @PostMapping(value = "/deleteCompany", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteCompany(@RequestBody ParentCompanyDto parentCompanyDto) {
+        companyService.delete(parentCompanyDto);
+    }
 }
