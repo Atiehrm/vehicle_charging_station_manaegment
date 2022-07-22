@@ -6,6 +6,7 @@ import com.tosan.electrical_vehicle_charging_management.dto.ParentCompanyDto;
 import com.tosan.electrical_vehicle_charging_management.dto.mapper.CompanyMapper;
 import com.tosan.electrical_vehicle_charging_management.repository.CompanyRepository;
 import com.tosan.electrical_vehicle_charging_management.service.exception.EntityIsExistException;
+import com.tosan.electrical_vehicle_charging_management.service.exception.EntityNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +18,10 @@ import java.util.Set;
  */
 @Service
 @AllArgsConstructor
-public class CompanyServiceImpl implements CompanyService{
+public class CompanyServiceImpl implements CompanyService {
     private final CompanyMapper companyMapper;
     private final CompanyRepository companyRepository;
+
     @Override
     public boolean save(ParentCompanyDto parentCompanyDto) {
         ParentCompany parentCompany1 = companyMapper.toParentCompany(parentCompanyDto);
@@ -34,7 +36,14 @@ public class CompanyServiceImpl implements CompanyService{
 
     @Override
     public boolean delete(ParentCompanyDto parentCompanyDto) {
-        return false;
+        ParentCompany parentCompany1 = companyMapper.toParentCompany(parentCompanyDto);
+        Optional<ParentCompany> foundedCompany = companyRepository.findByName(parentCompany1.getName());
+        if (foundedCompany.isEmpty()) {
+            throw new EntityNotExistException("company not exist!");
+        } else {
+            companyRepository.delete(parentCompany1);
+            return true;
+        }
     }
 
     @Override
