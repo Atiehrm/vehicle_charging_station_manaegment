@@ -34,9 +34,9 @@ public class CompanyRestController {
             @ApiResponse(code = 404, message = "not found!!!")})
     @GetMapping(value = "/AllCompaniesInfo"
             , produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<ParentCompanyDto>> getAllCompaniesInfo
-            (@RequestBody ParentCompanyDto dto) {
-        return new ResponseEntity(companyService.getCompaniesInformation(), HttpStatus.OK);
+    public ResponseEntity<Set<ParentCompanyDto>> getAllCompaniesInfo() {
+        Set<ParentCompanyDto> dtos = companyService.getCompaniesInformation();
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
     @ApiResponses(value = {
@@ -46,9 +46,8 @@ public class CompanyRestController {
             @ApiResponse(code = 403, message = "forbidden!!!"),
             @ApiResponse(code = 404, message = "not found!!!")})
     @PutMapping(value = "/SingleCompanyInfo", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ParentCompany> getSingleCompanyInfo(@RequestBody ParentCompanyDto parentCompanyDto) {
-        ParentCompany dto = companyService.findSingleCompanyByName(parentCompanyDto.getName());
-        return new ResponseEntity<>(dto, HttpStatus.OK);
+    public ResponseEntity<ParentCompanyDto> getSingleCompanyInfo(@RequestBody ParentCompanyDto parentCompanyDto) {
+        return new ResponseEntity<>(parentCompanyDto, HttpStatus.OK);
     }
 
     @ApiResponses(value = {
