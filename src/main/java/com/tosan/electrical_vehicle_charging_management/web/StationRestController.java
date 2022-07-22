@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -48,5 +49,16 @@ public class StationRestController {
     @GetMapping(value = "/singleStationInfo", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StationDto> getSingleCompanyInfo(@RequestBody StationDto dto) {
         return new ResponseEntity(stationService.singleStationInformation(dto.getName()), HttpStatus.OK);
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 400, message = "validation error!"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "not found!!!")})
+    @PostMapping(value = "/addStation", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void saveNewStation(@RequestBody StationDto dto) {
+        stationService.save(dto);
     }
 }
