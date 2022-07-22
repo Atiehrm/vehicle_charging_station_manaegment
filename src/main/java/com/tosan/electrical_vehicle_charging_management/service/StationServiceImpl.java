@@ -62,7 +62,8 @@ public class StationServiceImpl implements StationService {
 
     @Override
     public Station singleStationInformation(String name) {
-        return null;
+        Optional<Station> station = stationRepository.findByName(name);
+        return station.orElseThrow(() -> new EntityNotExistException("station not exist!"));
     }
 
     @Override
