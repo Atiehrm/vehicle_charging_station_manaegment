@@ -24,7 +24,6 @@ import java.util.Set;
 public class CompanyRestController {
     private final CompanyService companyService;
 
-
     @ApiOperation(value = "Get list of Company info ", response = Iterable.class, tags = "getCompanyInfos")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success|OK"),
