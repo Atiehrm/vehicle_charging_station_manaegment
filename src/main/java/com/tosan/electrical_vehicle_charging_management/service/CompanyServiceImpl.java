@@ -79,5 +79,5 @@ public class CompanyServiceImpl implements CompanyService {
         } else {
             return companyRepository.findAllStations(parentCompany1.getName());
         }
-}
+    }
 }
