@@ -10,10 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
@@ -71,6 +68,17 @@ public class StationRestController {
     @PostMapping(value = "/deleteStation", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void deleteStation(@RequestBody StationDto dto) {
         stationService.delete(dto);
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 400, message = "validation error!"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "not found!!!")})
+    @PutMapping(value = "/updateStation", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void updateStation(@RequestBody StationDto dto) {
+        stationService.update(dto);
     }
 
 }
