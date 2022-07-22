@@ -71,6 +71,13 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Set<Station> getAllStations(ParentCompanyDto parentCompanyDto) {
-        return null;
-    }
+        ParentCompany parentCompany1 = companyMapper.toParentCompany(parentCompanyDto);
+        Optional<ParentCompany> foundedCompany = companyRepository
+                .findByName(parentCompany1.getName());
+        if (foundedCompany.isEmpty()) {
+            throw new EntityNotExistException("company not exist!");
+        } else {
+            return companyRepository.findAllStations(parentCompany1.getName());
+        }
+}
 }
