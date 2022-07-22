@@ -2,7 +2,6 @@ package com.tosan.electrical_vehicle_charging_management.web;
 
 import com.tosan.electrical_vehicle_charging_management.data.entity.Station;
 import com.tosan.electrical_vehicle_charging_management.dto.CustomerDto;
-import com.tosan.electrical_vehicle_charging_management.dto.ParentCompanyDto;
 import com.tosan.electrical_vehicle_charging_management.dto.StationDto;
 import com.tosan.electrical_vehicle_charging_management.service.StationService;
 import io.swagger.annotations.ApiOperation;
@@ -48,8 +47,7 @@ public class StationRestController {
             @ApiResponse(code = 404, message = "not found!!!")})
     @GetMapping(value = "/singleStationInfo", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StationDto> getSingleCompanyInfo(@RequestBody StationDto dto) {
-        StationDto station = stationService.singleStationInformation(dto.getName());
-        return new ResponseEntity<>(station, HttpStatus.OK);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @ApiResponses(value = {
