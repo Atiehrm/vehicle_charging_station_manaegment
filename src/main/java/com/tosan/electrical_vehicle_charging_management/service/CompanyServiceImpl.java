@@ -60,7 +60,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Set<ParentCompany> getCompaniesInformation() {
-        return null;
+        return companyRepository.findAll();
     }
 
     @Override
