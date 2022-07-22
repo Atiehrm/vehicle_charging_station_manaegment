@@ -52,13 +52,14 @@ public class CompanyRestController {
 
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success|OK"),
-            @ApiResponse(code = 400, message = "validation error!"),
+            @ApiResponse(code = 400, message = "validation error!",response = ApiResponse.class),
             @ApiResponse(code = 401, message = "not authorized!"),
             @ApiResponse(code = 403, message = "forbidden!!!"),
             @ApiResponse(code = 404, message = "not found!!!")})
     @PostMapping(value = "/addCompany", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void saveNewCompany(@RequestBody ParentCompanyDto parentCompanyDto) {
+    public ResponseEntity<String> saveNewCompany(@RequestBody ParentCompanyDto parentCompanyDto) {
         companyService.save(parentCompanyDto);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @ApiResponses(value = {
@@ -68,8 +69,9 @@ public class CompanyRestController {
             @ApiResponse(code = 403, message = "forbidden!!!"),
             @ApiResponse(code = 404, message = "not found!!!")})
     @PostMapping(value = "/deleteCompany", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void deleteCompany(@RequestBody ParentCompanyDto parentCompanyDto) {
+    public ResponseEntity<String> deleteCompany(@RequestBody ParentCompanyDto parentCompanyDto) {
         companyService.delete(parentCompanyDto);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @ApiResponses(value = {
@@ -79,7 +81,8 @@ public class CompanyRestController {
             @ApiResponse(code = 403, message = "forbidden!!!"),
             @ApiResponse(code = 404, message = "not found!!!")})
     @PutMapping(value = "/updateCompany", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void updateCompany(@RequestBody ParentCompanyDto parentCompanyDto) {
+    public ResponseEntity<String> updateCompany(@RequestBody ParentCompanyDto parentCompanyDto) {
         companyService.update(parentCompanyDto);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
